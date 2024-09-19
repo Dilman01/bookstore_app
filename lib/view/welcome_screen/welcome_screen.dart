@@ -2,6 +2,7 @@ import 'package:bookstore_app/core/common/widgets/custom_button.dart';
 import 'package:bookstore_app/core/constants/app_colors.dart';
 import 'package:bookstore_app/core/constants/asset_paths.dart';
 import 'package:bookstore_app/view/welcome_screen/login_screen/login_screen.dart';
+import 'package:bookstore_app/view/welcome_screen/register_screen/register_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -65,7 +66,11 @@ class WelcomeScreen extends StatelessWidget {
             height: 10.h,
           ),
           CustomButton(
-            onPressed: () {},
+            onPressed: () => Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => const RegisterScreen(),
+              ),
+            ),
             title: 'Register',
             backgroundColor: AppColors.secondaryColor,
             foregroundColor: AppColors.primaryColor,

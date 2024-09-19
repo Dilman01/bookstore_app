@@ -26,6 +26,7 @@ class MainApp extends StatelessWidget {
         theme: ThemeData().copyWith(
           appBarTheme: const AppBarTheme().copyWith(
             backgroundColor: AppColors.secondaryColor,
+            elevation: 0,
           ),
           scaffoldBackgroundColor: AppColors.secondaryColor,
           textSelectionTheme: TextSelectionThemeData(
