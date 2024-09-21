@@ -2,14 +2,20 @@ import 'package:bookstore_app/core/constants/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class CustomTextField extends StatefulWidget {
+class CustomTextField extends StatelessWidget {
   const CustomTextField({
     super.key,
     required this.controller,
     required this.hintText,
     this.suffixIcon,
     this.obscureText = false,
+    this.enableSuggestions = true,
+    this.keyboardType,
+    this.autovalidateMode = AutovalidateMode.onUnfocus,
+    this.textCapitalization = TextCapitalization.none,
     this.onFieldSubmitted,
+    this.onChanged,
+    this.validator,
   });
 
   final TextEditingController controller;
@@ -17,22 +23,19 @@ class CustomTextField extends StatefulWidget {
 
   final Widget? suffixIcon;
   final bool obscureText;
-  final Function(String)? onFieldSubmitted;
-
-  @override
-  State<CustomTextField> createState() => _CustomTextFieldState();
-}
-
-class _CustomTextFieldState extends State<CustomTextField> {
-  @override
-  void dispose() {
-    widget.controller.dispose();
-    super.dispose();
-  }
+  final bool enableSuggestions;
+  final TextInputType? keyboardType;
+  final AutovalidateMode? autovalidateMode;
+  final TextCapitalization textCapitalization;
+  final void Function(String value)? onFieldSubmitted;
+  final void Function(String value)? onChanged;
+  final String? Function(String? value)? validator;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      controller: controller,
+      textCapitalization: textCapitalization,
       decoration: InputDecoration(
         fillColor: AppColors.textFieldBgColor,
         filled: true,
@@ -46,16 +49,27 @@ class _CustomTextFieldState extends State<CustomTextField> {
           borderRadius: BorderRadius.circular(5).r,
           borderSide: BorderSide.none,
         ),
-        hintText: widget.hintText,
+        hintText: hintText,
         hintStyle: TextStyle(
           color: const Color.fromRGBO(37, 37, 37, 1),
           fontSize: 18.sp,
         ),
-        suffixIcon: widget.suffixIcon,
+        suffixIcon: suffixIcon,
+        errorBorder: const OutlineInputBorder(
+          borderSide: BorderSide(
+            color: Colors.red,
+          ),
+        ),
       ),
-      obscureText: widget.obscureText,
+      obscureText: obscureText,
       obscuringCharacter: '*',
-      onFieldSubmitted: widget.onFieldSubmitted,
+      enableSuggestions: enableSuggestions,
+      keyboardType: keyboardType,
+      autovalidateMode: autovalidateMode,
+      autocorrect: false,
+      onFieldSubmitted: onFieldSubmitted,
+      onChanged: onChanged,
+      validator: validator,
     );
   }
 }
