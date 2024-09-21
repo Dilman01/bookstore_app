@@ -42,7 +42,16 @@ class AuthRepositroy {
 
       return true;
     } on FirebaseAuthException catch (e) {
-      throw Exception(e.message ?? 'Sign Up Failed');
+      switch (e.code) {
+        case 'email-already-in-use':
+          throw Exception('Email is already in use.');
+        case 'invalid-email':
+          throw Exception('Invalid email address.');
+        case 'weak-password':
+          throw Exception('The password provided is too weak.');
+        default:
+          throw Exception('Sign Up Failed: ${e.message}');
+      }
     }
   }
 
@@ -71,7 +80,16 @@ class AuthRepositroy {
 
       return true;
     } on FirebaseAuthException catch (e) {
-      throw Exception(e.message ?? 'Sign In Failed');
+      switch (e.code) {
+        case 'user-not-found':
+          throw Exception('No user found with this email.');
+        case 'wrong-password':
+          throw Exception('Incorrect password.');
+        case 'invalid-email':
+          throw Exception('Invalid email address.');
+        default:
+          throw Exception('Sign In Failed: ${e.message}');
+      }
     }
   }
 
@@ -79,7 +97,14 @@ class AuthRepositroy {
     try {
       await _firebaseAuth.sendPasswordResetEmail(email: email);
     } on FirebaseAuthException catch (e) {
-      throw Exception(e.message ?? 'Password Reset Failded');
+      switch (e.code) {
+        case 'user-not-found':
+          throw Exception('No user found with this email.');
+        case 'invalid-email':
+          throw Exception('Invalid email address.');
+        default:
+          throw Exception('Password Reset Failed: ${e.message}');
+      }
     }
   }
 

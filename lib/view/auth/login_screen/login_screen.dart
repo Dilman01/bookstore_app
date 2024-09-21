@@ -23,6 +23,31 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
+    ref.listen<AsyncValue<bool>>(authViewModelProvider, (previous, next) {
+      if (next is AsyncError) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              next.error.toString(),
+              style: const TextStyle(
+                color: Colors.black,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+            duration: const Duration(seconds: 5),
+            showCloseIcon: true,
+            closeIconColor: AppColors.primaryColor,
+            backgroundColor: Colors.white,
+            behavior: SnackBarBehavior.floating,
+            margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 50).r,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20).r,
+            ),
+          ),
+        );
+      }
+    });
+
     final emailController = useTextEditingController();
     final passwordController = useTextEditingController();
     final showPassword = useState(false);
