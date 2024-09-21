@@ -1,9 +1,10 @@
+import 'package:bookstore_app/view_model/auth_view_model/auth_view_model.dart';
 import 'package:flutter/material.dart';
 
 import 'package:bookstore_app/core/common/widgets/custom_button.dart';
 import 'package:bookstore_app/core/constants/app_colors.dart';
-import 'package:bookstore_app/view/welcome_screen/register_screen/register_screen.dart';
-import 'package:bookstore_app/view/welcome_screen/widgets/custom_text_field.dart';
+import 'package:bookstore_app/view/auth/register_screen/register_screen.dart';
+import 'package:bookstore_app/view/auth/widgets/custom_text_field.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -109,7 +110,23 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                         onPressed: () {
                           if (_formKey.currentState != null &&
                               _formKey.currentState!.validate()) {
-                            print('Hello there 👋!');
+                            ref
+                                .read(authViewModelProvider.notifier)
+                                .signIn(
+                                  email: emailController.text.trim(),
+                                  password: passwordController.text.trim(),
+                                )
+                                .then(
+                              (value) {
+                                print('==================================');
+                                print(value);
+                                print('==================================');
+                                if (value) {
+                                  // ignore: use_build_context_synchronously
+                                  Navigator.of(context).pop();
+                                }
+                              },
+                            );
                           }
                         },
                         title: 'Get Started',

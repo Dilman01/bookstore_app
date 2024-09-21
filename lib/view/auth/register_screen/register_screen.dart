@@ -1,7 +1,8 @@
 import 'package:bookstore_app/core/common/widgets/custom_button.dart';
 import 'package:bookstore_app/core/constants/app_colors.dart';
-import 'package:bookstore_app/view/welcome_screen/login_screen/login_screen.dart';
-import 'package:bookstore_app/view/welcome_screen/widgets/custom_text_field.dart';
+import 'package:bookstore_app/view/auth/login_screen/login_screen.dart';
+import 'package:bookstore_app/view/auth/widgets/custom_text_field.dart';
+import 'package:bookstore_app/view_model/auth_view_model/auth_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
@@ -160,7 +161,25 @@ class _LoginScreenState extends ConsumerState<RegisterScreen> {
                         onPressed: () {
                           if (_formKey.currentState != null &&
                               _formKey.currentState!.validate()) {
-                            print('Hello there 👋!');
+                            ref
+                                .read(authViewModelProvider.notifier)
+                                .signUp(
+                                  email: emailController.text.trim(),
+                                  password: passwordController.text.trim(),
+                                  username: usernameController.text.trim(),
+                                  address: 'address',
+                                )
+                                .then(
+                              (value) {
+                                print('==================================');
+                                print(value);
+                                print('==================================');
+                                if (value) {
+                                  // ignore: use_build_context_synchronously
+                                  Navigator.of(context).pop();
+                                }
+                              },
+                            );
                           }
                         },
                         title: 'Register',
