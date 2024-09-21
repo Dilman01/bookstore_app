@@ -1,3 +1,4 @@
+import 'package:bookstore_app/view/auth/forgot_password_screen/forgot_password_screen.dart';
 import 'package:bookstore_app/view_model/auth_view_model/auth_view_model.dart';
 import 'package:flutter/material.dart';
 
@@ -87,8 +88,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                           },
                           icon: FaIcon(
                             showPassword.value
-                                ? FontAwesomeIcons.solidEye
-                                : FontAwesomeIcons.solidEyeSlash,
+                                ? FontAwesomeIcons.solidEyeSlash
+                                : FontAwesomeIcons.solidEye,
                           ),
                           color: const Color.fromRGBO(37, 37, 37, 1),
                         ),
@@ -142,7 +143,13 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 80).r,
                   child: TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => const ForgotPasswordScreen(),
+                        ),
+                      );
+                    },
                     style: TextButton.styleFrom(
                       foregroundColor: Colors.black,
                       elevation: 0,

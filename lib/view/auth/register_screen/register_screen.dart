@@ -107,8 +107,8 @@ class _LoginScreenState extends ConsumerState<RegisterScreen> {
                           },
                           icon: FaIcon(
                             showPassword.value
-                                ? FontAwesomeIcons.solidEye
-                                : FontAwesomeIcons.solidEyeSlash,
+                                ? FontAwesomeIcons.solidEyeSlash
+                                : FontAwesomeIcons.solidEye,
                           ),
                           color: const Color.fromRGBO(37, 37, 37, 1),
                         ),
@@ -136,8 +136,8 @@ class _LoginScreenState extends ConsumerState<RegisterScreen> {
                           },
                           icon: FaIcon(
                             showConfirmPassword.value
-                                ? FontAwesomeIcons.solidEye
-                                : FontAwesomeIcons.solidEyeSlash,
+                                ? FontAwesomeIcons.solidEyeSlash
+                                : FontAwesomeIcons.solidEye,
                           ),
                           color: const Color.fromRGBO(37, 37, 37, 1),
                         ),
@@ -171,9 +171,6 @@ class _LoginScreenState extends ConsumerState<RegisterScreen> {
                                 )
                                 .then(
                               (value) {
-                                print('==================================');
-                                print(value);
-                                print('==================================');
                                 if (value) {
                                   // ignore: use_build_context_synchronously
                                   Navigator.of(context).pop();
