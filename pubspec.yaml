@@ -17,6 +17,7 @@ dependencies:
   flutter_svg: ^2.0.10+1
   font_awesome_flutter: ^10.7.0
   freezed_annotation: ^2.4.4
+  google_fonts: ^6.2.1
   hooks_riverpod: ^2.5.2
   json_annotation: ^4.9.0
   riverpod_annotation: ^2.3.5
@@ -25,7 +26,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^4.0.0
-  flutter_launcher_icons: ^0.13.1
+  flutter_launcher_icons: ^0.14.0
   flutter_native_splash: ^2.4.1
   riverpod_generator: ^2.4.3
   build_runner: ^2.4.12
@@ -60,3 +61,4 @@ flutter:
 
   assets:
     - assets/images/
+    - assets/google_fonts/

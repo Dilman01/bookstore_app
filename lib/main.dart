@@ -8,6 +8,7 @@ import 'package:bookstore_app/view/auth/welcome_screen.dart';
 
 import 'package:bookstore_app/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -25,6 +26,10 @@ void main() async {
     ],
   );
 
+  await ScreenUtil.ensureScreenSize();
+
+  GoogleFonts.config.allowRuntimeFetching = false;
+
   runApp(
     const ProviderScope(
       child: MainApp(),
@@ -41,7 +46,7 @@ class MainApp extends ConsumerWidget {
 
     return ScreenUtilInit(
       designSize: const Size(360, 800),
-      child: MaterialApp(
+      builder: (context, child) => MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData().copyWith(
           appBarTheme: const AppBarTheme().copyWith(
@@ -55,6 +60,44 @@ class MainApp extends ConsumerWidget {
             selectionHandleColor: Colors.blue,
             selectionColor: Colors.lightBlue.withOpacity(0.3),
           ),
+          textTheme: Theme.of(context).textTheme.copyWith(
+                headlineLarge: GoogleFonts.openSans().copyWith(
+                  fontSize: 24.sp,
+                  fontWeight: FontWeight.w600,
+                ),
+                headlineMedium: GoogleFonts.openSans().copyWith(
+                  fontSize: 22.sp,
+                  fontWeight: FontWeight.w600,
+                ),
+                titleLarge: GoogleFonts.openSans().copyWith(
+                  fontSize: 20.sp,
+                  fontWeight: FontWeight.w600,
+                ),
+                titleMedium: GoogleFonts.openSans().copyWith(
+                  fontSize: 16.sp,
+                  fontWeight: FontWeight.w600,
+                ),
+                titleSmall: GoogleFonts.openSans().copyWith(
+                  fontSize: 14.sp,
+                  fontWeight: FontWeight.w600,
+                ),
+                bodyMedium: GoogleFonts.openSans().copyWith(
+                  fontSize: 16.sp,
+                ),
+                bodySmall: GoogleFonts.openSans().copyWith(
+                  fontSize: 14.sp,
+                  // letterSpacing: -0.41,
+                  // wordSpacing: 1,
+                ),
+                displaySmall: GoogleFonts.openSans().copyWith(
+                  fontSize: 11.sp,
+                  fontWeight: FontWeight.w300,
+                ),
+                labelSmall: GoogleFonts.openSans().copyWith(
+                  fontSize: 11.sp,
+                  fontWeight: FontWeight.w300,
+                ),
+              ),
         ),
         home: StreamBuilder(
           stream: user,

@@ -28,10 +28,9 @@ class _LoginScreenState extends ConsumerState<RegisterScreen> {
           SnackBar(
             content: Text(
               next.error.toString(),
-              style: const TextStyle(
-                color: Colors.black,
-                fontWeight: FontWeight.w600,
-              ),
+              style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                    color: Colors.black,
+                  ),
             ),
             duration: const Duration(seconds: 5),
             showCloseIcon: true,
@@ -63,10 +62,9 @@ class _LoginScreenState extends ConsumerState<RegisterScreen> {
         appBar: AppBar(
           title: Text(
             'Register',
-            style: TextStyle(
-              fontSize: 24.sp,
-              fontWeight: FontWeight.w500,
-            ),
+            style: Theme.of(context).textTheme.headlineLarge!.copyWith(
+                  color: AppColors.primaryColor,
+                ),
           ),
           centerTitle: true,
         ),
@@ -81,9 +79,9 @@ class _LoginScreenState extends ConsumerState<RegisterScreen> {
                 ),
                 Text(
                   'Please fill your details to signup.',
-                  style: TextStyle(
-                    fontSize: 16.sp,
-                  ),
+                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                        color: AppColors.primaryColor,
+                      ),
                 ),
                 SizedBox(
                   height: 32.h,
@@ -218,10 +216,10 @@ class _LoginScreenState extends ConsumerState<RegisterScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      'Alread a Member? ',
-                      style: TextStyle(
-                        fontSize: 14.sp,
-                      ),
+                      'Already a Member? ',
+                      style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                            color: Colors.black,
+                          ),
                     ),
                     InkWell(
                       onTap: () => Navigator.of(context).pushReplacement(
@@ -231,10 +229,9 @@ class _LoginScreenState extends ConsumerState<RegisterScreen> {
                       ),
                       child: Text(
                         'Signin',
-                        style: TextStyle(
-                          fontSize: 14.sp,
-                          fontWeight: FontWeight.bold,
-                        ),
+                        style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                              color: Colors.black,
+                            ),
                       ),
                     ),
                   ],

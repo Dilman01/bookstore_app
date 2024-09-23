@@ -50,10 +50,9 @@ class CustomTextField extends StatelessWidget {
           borderSide: BorderSide.none,
         ),
         hintText: hintText,
-        hintStyle: TextStyle(
-          color: const Color.fromRGBO(37, 37, 37, 1),
-          fontSize: 18.sp,
-        ),
+        hintStyle: Theme.of(context).textTheme.bodySmall!.copyWith(
+              color: const Color.fromRGBO(37, 37, 37, 1),
+            ),
         suffixIcon: suffixIcon,
         errorBorder: const OutlineInputBorder(
           borderSide: BorderSide(

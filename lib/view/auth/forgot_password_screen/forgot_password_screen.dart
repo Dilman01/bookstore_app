@@ -61,9 +61,9 @@ class ForgotPasswordScreen extends HookConsumerWidget {
           children: [
             Text(
               'Please write your email, to send the link to reset your password.',
-              style: TextStyle(
-                fontSize: 16.sp,
-              ),
+              style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                    color: AppColors.primaryColor,
+                  ),
             ),
             SizedBox(
               height: 32.h,

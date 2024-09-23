@@ -29,10 +29,9 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
           SnackBar(
             content: Text(
               next.error.toString(),
-              style: const TextStyle(
-                color: Colors.black,
-                fontWeight: FontWeight.w600,
-              ),
+              style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                    color: Colors.black,
+                  ),
             ),
             duration: const Duration(seconds: 5),
             showCloseIcon: true,
@@ -60,10 +59,9 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
         appBar: AppBar(
           title: Text(
             'Get Started',
-            style: TextStyle(
-              fontSize: 24.sp,
-              fontWeight: FontWeight.w500,
-            ),
+            style: Theme.of(context).textTheme.headlineLarge!.copyWith(
+                  color: AppColors.primaryColor,
+                ),
           ),
           centerTitle: true,
         ),
@@ -78,9 +76,9 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                 ),
                 Text(
                   'Please fill your details to login.',
-                  style: TextStyle(
-                    fontSize: 16.sp,
-                  ),
+                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                        color: AppColors.primaryColor,
+                      ),
                 ),
                 SizedBox(
                   height: 32.h,
@@ -144,9 +142,6 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                                 )
                                 .then(
                               (value) {
-                                print('==================================');
-                                print(value);
-                                print('==================================');
                                 if (value) {
                                   // ignore: use_build_context_synchronously
                                   Navigator.of(context).pop();
@@ -181,10 +176,10 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     ),
                     child: Text(
                       'Forgot Password?',
-                      style: TextStyle(
-                        fontSize: 14.sp,
-                        decoration: TextDecoration.underline,
-                      ),
+                      style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                            color: Colors.black,
+                            decoration: TextDecoration.underline,
+                          ),
                     ),
                   ),
                 ),
@@ -196,9 +191,9 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                   children: [
                     Text(
                       'New Member? ',
-                      style: TextStyle(
-                        fontSize: 14.sp,
-                      ),
+                      style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                            color: Colors.black,
+                          ),
                     ),
                     InkWell(
                       onTap: () => Navigator.of(context).pushReplacement(
@@ -208,10 +203,9 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                       ),
                       child: Text(
                         'Register',
-                        style: TextStyle(
-                          fontSize: 14.sp,
-                          fontWeight: FontWeight.bold,
-                        ),
+                        style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                              color: Colors.black,
+                            ),
                       ),
                     ),
                   ],

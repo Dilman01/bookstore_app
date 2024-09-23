@@ -43,12 +43,12 @@ class WelcomeScreen extends StatelessWidget {
               height: 20.h,
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 25).r,
+              padding: const EdgeInsets.symmetric(horizontal: 30).r,
               child: Text(
                 'Read more and stress less with our online book shopping app. Shop from anywhere you are and discover titles that you love. Happy reading!',
-                style: TextStyle(
-                  fontSize: 14.sp,
-                ),
+                style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                      color: AppColors.primaryColor,
+                    ),
                 textAlign: TextAlign.center,
               ),
             ),

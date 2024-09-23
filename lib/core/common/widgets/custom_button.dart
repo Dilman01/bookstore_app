@@ -30,9 +30,9 @@ class CustomButton extends StatelessWidget {
       ),
       child: Text(
         title,
-        style: TextStyle(
-          fontSize: 14.sp,
-        ),
+        style: Theme.of(context).textTheme.titleSmall!.copyWith(
+              color: foregroundColor,
+            ),
       ),
     );
   }
