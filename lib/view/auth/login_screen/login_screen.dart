@@ -59,9 +59,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
         appBar: AppBar(
           title: Text(
             'Get Started',
-            style: Theme.of(context).textTheme.headlineLarge!.copyWith(
-                  color: AppColors.primaryColor,
-                ),
+            style: Theme.of(context).textTheme.headlineLarge,
           ),
           centerTitle: true,
         ),
@@ -76,9 +74,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                 ),
                 Text(
                   'Please fill your details to login.',
-                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                        color: AppColors.primaryColor,
-                      ),
+                  style: Theme.of(context).textTheme.bodyMedium,
                 ),
                 SizedBox(
                   height: 32.h,

@@ -22,9 +22,7 @@ class ForgotPasswordScreen extends HookConsumerWidget {
               children: [
                 Text(
                   'An email has been sent to $email to reset the password.\nPlease check your email inbox, and if you didn\'t find it check your spams or make sure that you provided the correct email address.',
-                  style: TextStyle(
-                    fontSize: 16.sp,
-                  ),
+                  style: Theme.of(context).textTheme.bodyMedium,
                 ),
                 SizedBox(
                   height: 20.h,
@@ -61,9 +59,7 @@ class ForgotPasswordScreen extends HookConsumerWidget {
           children: [
             Text(
               'Please write your email, to send the link to reset your password.',
-              style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                    color: AppColors.primaryColor,
-                  ),
+              style: Theme.of(context).textTheme.bodyMedium,
             ),
             SizedBox(
               height: 32.h,

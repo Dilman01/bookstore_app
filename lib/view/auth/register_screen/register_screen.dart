@@ -62,9 +62,7 @@ class _LoginScreenState extends ConsumerState<RegisterScreen> {
         appBar: AppBar(
           title: Text(
             'Register',
-            style: Theme.of(context).textTheme.headlineLarge!.copyWith(
-                  color: AppColors.primaryColor,
-                ),
+            style: Theme.of(context).textTheme.headlineLarge,
           ),
           centerTitle: true,
         ),
@@ -79,9 +77,7 @@ class _LoginScreenState extends ConsumerState<RegisterScreen> {
                 ),
                 Text(
                   'Please fill your details to signup.',
-                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                        color: AppColors.primaryColor,
-                      ),
+                  style: Theme.of(context).textTheme.bodyMedium,
                 ),
                 SizedBox(
                   height: 32.h,

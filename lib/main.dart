@@ -1,9 +1,9 @@
 import 'package:bookstore_app/core/common/providers/auth_state_provider.dart';
+import 'package:bookstore_app/core/theme/app_theme.dart';
 import 'package:bookstore_app/view/home/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'package:bookstore_app/core/constants/app_colors.dart';
 import 'package:bookstore_app/view/auth/welcome_screen.dart';
 
 import 'package:bookstore_app/firebase_options.dart';
@@ -48,57 +48,7 @@ class MainApp extends ConsumerWidget {
       designSize: const Size(360, 800),
       builder: (context, child) => MaterialApp(
         debugShowCheckedModeBanner: false,
-        theme: ThemeData().copyWith(
-          appBarTheme: const AppBarTheme().copyWith(
-            backgroundColor: AppColors.secondaryColor,
-            scrolledUnderElevation: 0,
-            elevation: 0,
-          ),
-          scaffoldBackgroundColor: AppColors.secondaryColor,
-          textSelectionTheme: TextSelectionThemeData(
-            cursorColor: Colors.black,
-            selectionHandleColor: Colors.blue,
-            selectionColor: Colors.lightBlue.withOpacity(0.3),
-          ),
-          textTheme: Theme.of(context).textTheme.copyWith(
-                headlineLarge: GoogleFonts.openSans().copyWith(
-                  fontSize: 24.sp,
-                  fontWeight: FontWeight.w600,
-                ),
-                headlineMedium: GoogleFonts.openSans().copyWith(
-                  fontSize: 22.sp,
-                  fontWeight: FontWeight.w600,
-                ),
-                titleLarge: GoogleFonts.openSans().copyWith(
-                  fontSize: 20.sp,
-                  fontWeight: FontWeight.w600,
-                ),
-                titleMedium: GoogleFonts.openSans().copyWith(
-                  fontSize: 16.sp,
-                  fontWeight: FontWeight.w600,
-                ),
-                titleSmall: GoogleFonts.openSans().copyWith(
-                  fontSize: 14.sp,
-                  fontWeight: FontWeight.w600,
-                ),
-                bodyMedium: GoogleFonts.openSans().copyWith(
-                  fontSize: 16.sp,
-                ),
-                bodySmall: GoogleFonts.openSans().copyWith(
-                  fontSize: 14.sp,
-                  // letterSpacing: -0.41,
-                  // wordSpacing: 1,
-                ),
-                displaySmall: GoogleFonts.openSans().copyWith(
-                  fontSize: 11.sp,
-                  fontWeight: FontWeight.w300,
-                ),
-                labelSmall: GoogleFonts.openSans().copyWith(
-                  fontSize: 11.sp,
-                  fontWeight: FontWeight.w300,
-                ),
-              ),
-        ),
+        theme: AppTheme.lightTheme,
         home: StreamBuilder(
           stream: user,
           builder: (context, snapshot) {

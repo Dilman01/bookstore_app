@@ -36,6 +36,7 @@ class CustomTextField extends StatelessWidget {
     return TextFormField(
       controller: controller,
       textCapitalization: textCapitalization,
+      style: Theme.of(context).textTheme.bodySmall,
       decoration: InputDecoration(
         fillColor: AppColors.textFieldBgColor,
         filled: true,
