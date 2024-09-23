@@ -1,3 +1,4 @@
+import 'package:bookstore_app/core/exceptions/auth_exception.dart';
 import 'package:bookstore_app/models/user_model/user_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -25,7 +26,7 @@ class AuthRepositroy {
       final user = userCredential.user;
 
       if (user == null) {
-        throw Exception('User creation failed');
+        throw AuthException('User creation failed');
       }
 
       final userModel = UserModel(
@@ -44,13 +45,13 @@ class AuthRepositroy {
     } on FirebaseAuthException catch (e) {
       switch (e.code) {
         case 'email-already-in-use':
-          throw Exception('Email is already in use.');
+          throw AuthException('Email is already in use.');
         case 'invalid-email':
-          throw Exception('Invalid email address.');
+          throw AuthException('Invalid email address.');
         case 'weak-password':
-          throw Exception('The password provided is too weak.');
+          throw AuthException('The password provided is too weak.');
         default:
-          throw Exception('Sign Up Failed: ${e.message}');
+          throw AuthException('Sign Up Failed: ${e.message}');
       }
     }
   }
@@ -68,27 +69,27 @@ class AuthRepositroy {
       final user = userCredential.user;
 
       if (user == null) {
-        throw Exception('Login faild');
+        throw AuthException('Login faild');
       }
 
       final doc =
           await _firebaseFirestore.collection('users').doc(user.uid).get();
 
       if (!doc.exists) {
-        throw Exception('User not found in Firestore');
+        throw AuthException('User not found in Firestore');
       }
 
       return true;
     } on FirebaseAuthException catch (e) {
       switch (e.code) {
         case 'user-not-found':
-          throw Exception('No user found with this email.');
+          throw AuthException('No user found with this email.');
         case 'wrong-password':
-          throw Exception('Incorrect password.');
+          throw AuthException('Incorrect password.');
         case 'invalid-email':
-          throw Exception('Invalid email address.');
+          throw AuthException('Invalid email address.');
         default:
-          throw Exception('Sign In Failed: ${e.message}');
+          throw AuthException('Sign In Failed: ${e.message}');
       }
     }
   }
@@ -99,11 +100,11 @@ class AuthRepositroy {
     } on FirebaseAuthException catch (e) {
       switch (e.code) {
         case 'user-not-found':
-          throw Exception('No user found with this email.');
+          throw AuthException('No user found with this email.');
         case 'invalid-email':
-          throw Exception('Invalid email address.');
+          throw AuthException('Invalid email address.');
         default:
-          throw Exception('Password Reset Failed: ${e.message}');
+          throw AuthException('Password Reset Failed: ${e.message}');
       }
     }
   }
