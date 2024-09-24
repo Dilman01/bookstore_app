@@ -54,12 +54,16 @@ class AuthViewModel extends _$AuthViewModel {
     }
   }
 
-  Future<void> resetPassword({required String email}) async {
+  Future<bool> resetPassword({required String email}) async {
     try {
       final authRepository = ref.read(authRepositoryProvider);
-      await authRepository.resetPassword(email: email);
+      state = AsyncData(
+        await authRepository.resetPassword(email: email),
+      );
+      return true;
     } catch (e) {
       state = AsyncError(e, StackTrace.current);
+      return false;
     }
   }
 

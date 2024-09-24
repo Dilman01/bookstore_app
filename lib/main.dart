@@ -1,15 +1,12 @@
-import 'package:bookstore_app/core/common/providers/auth_state_provider.dart';
-import 'package:bookstore_app/core/theme/app_theme.dart';
-import 'package:bookstore_app/view/home/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'package:bookstore_app/view/auth/welcome_screen.dart';
-
+import 'package:bookstore_app/core/router/router_provider.dart';
+import 'package:bookstore_app/core/theme/app_theme.dart';
 import 'package:bookstore_app/firebase_options.dart';
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -42,24 +39,18 @@ class MainApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final user = ref.watch(authStateProvider.future).asStream();
+    // final user = ref.watch(authStateProvider.future).asStream();
+    final router = ref.watch(routerProvider);
 
     return ScreenUtilInit(
       designSize: const Size(360, 800),
-      builder: (context, child) => MaterialApp(
-        debugShowCheckedModeBanner: false,
-        theme: AppTheme.lightTheme,
-        home: StreamBuilder(
-          stream: user,
-          builder: (context, snapshot) {
-            if (snapshot.data == null) {
-              return const WelcomeScreen();
-            }
-
-            return const HomeScreen();
-          },
-        ),
-      ),
+      builder: (context, child) {
+        return MaterialApp.router(
+          debugShowCheckedModeBanner: false,
+          theme: AppTheme.lightTheme,
+          routerConfig: router,
+        );
+      },
     );
   }
 }

@@ -94,9 +94,11 @@ class AuthRepositroy {
     }
   }
 
-  Future<void> resetPassword({required String email}) async {
+  Future<bool> resetPassword({required String email}) async {
     try {
       await _firebaseAuth.sendPasswordResetEmail(email: email);
+
+      return true;
     } on FirebaseAuthException catch (e) {
       switch (e.code) {
         case 'user-not-found':

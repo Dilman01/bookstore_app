@@ -1,6 +1,6 @@
 import 'package:bookstore_app/core/common/widgets/custom_button.dart';
 import 'package:bookstore_app/core/constants/app_colors.dart';
-import 'package:bookstore_app/view/auth/login_screen/login_screen.dart';
+import 'package:bookstore_app/core/router/router_names.dart';
 import 'package:bookstore_app/view/auth/widgets/custom_text_field.dart';
 import 'package:bookstore_app/view_model/auth_view_model/auth_view_model.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +9,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 
@@ -213,8 +214,9 @@ class _LoginScreenState extends ConsumerState<RegisterScreen> {
                               (value) {
                                 overlay.hide();
                                 if (value) {
-                                  // ignore: use_build_context_synchronously
-                                  Navigator.of(context).pop();
+                                  if (context.mounted) {
+                                    context.pop();
+                                  }
                                 }
                               },
                             );
@@ -240,11 +242,8 @@ class _LoginScreenState extends ConsumerState<RegisterScreen> {
                                     ),
                           ),
                           InkWell(
-                            onTap: () => Navigator.of(context).pushReplacement(
-                              MaterialPageRoute(
-                                builder: (context) => const LoginScreen(),
-                              ),
-                            ),
+                            onTap: () =>
+                                context.pushReplacementNamed(RouterNames.login),
                             child: Text(
                               'Signin',
                               style: Theme.of(context)

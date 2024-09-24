@@ -4,16 +4,26 @@ import 'package:bookstore_app/view/auth/widgets/custom_text_field.dart';
 import 'package:bookstore_app/view_model/auth_view_model/auth_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class ForgotPasswordScreen extends HookConsumerWidget {
+class ForgotPasswordScreen extends StatefulHookConsumerWidget {
   const ForgotPasswordScreen({super.key});
+
+  @override
+  ConsumerState<ForgotPasswordScreen> createState() =>
+      _ForgotPasswordScreenState();
+}
+
+class _ForgotPasswordScreenState extends ConsumerState<ForgotPasswordScreen> {
+  final _formKey = GlobalKey<FormState>();
 
   void showDialog(BuildContext context, String email) {
     showAdaptiveDialog(
       context: context,
-      builder: (context) {
+      barrierDismissible: false,
+      builder: (_) {
         return AlertDialog(
           content: Padding(
             padding: const EdgeInsets.all(8.0),
@@ -29,8 +39,8 @@ class ForgotPasswordScreen extends HookConsumerWidget {
                 ),
                 CustomButton(
                   onPressed: () {
-                    Navigator.of(context).pop();
-                    Navigator.of(context).pop();
+                    context.pop();
+                    context.pop();
                   },
                   title: 'OK',
                   backgroundColor: AppColors.primaryColor,
@@ -45,7 +55,7 @@ class ForgotPasswordScreen extends HookConsumerWidget {
   }
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     final emailController = useTextEditingController();
     return Scaffold(
       appBar: AppBar(
@@ -64,21 +74,43 @@ class ForgotPasswordScreen extends HookConsumerWidget {
             SizedBox(
               height: 32.h,
             ),
-            CustomTextField(
-              controller: emailController,
-              hintText: 'Write your email here...',
-              keyboardType: TextInputType.emailAddress,
+            Form(
+              key: _formKey,
+              child: CustomTextField(
+                controller: emailController,
+                hintText: 'Write your email here...',
+                keyboardType: TextInputType.emailAddress,
+                validator: (value) {
+                  if (!value!.contains('@') || value.isEmpty) {
+                    return 'Invalid email.';
+                  }
+
+                  return null;
+                },
+              ),
             ),
             SizedBox(
               height: 32.h,
             ),
             CustomButton(
               onPressed: () {
-                ref
-                    .read(authViewModelProvider.notifier)
-                    .resetPassword(email: emailController.text.trim());
+                if (_formKey.currentState != null &&
+                    _formKey.currentState!.validate()) {
+                  FocusManager.instance.primaryFocus?.unfocus();
 
-                showDialog(context, emailController.text.trim());
+                  ref
+                      .read(authViewModelProvider.notifier)
+                      .resetPassword(email: emailController.text.trim())
+                      .then(
+                    (value) {
+                      if (value) {
+                        if (context.mounted) {
+                          showDialog(context, emailController.text.trim());
+                        }
+                      }
+                    },
+                  );
+                }
               },
               title: 'Send reset link',
               backgroundColor: AppColors.primaryColor,

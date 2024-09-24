@@ -1,11 +1,12 @@
 import 'package:bookstore_app/core/common/widgets/custom_button.dart';
 import 'package:bookstore_app/core/constants/app_colors.dart';
 import 'package:bookstore_app/core/constants/asset_paths.dart';
-import 'package:bookstore_app/view/auth/login_screen/login_screen.dart';
-import 'package:bookstore_app/view/auth/register_screen/register_screen.dart';
+import 'package:bookstore_app/core/router/router_names.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({super.key});
@@ -56,11 +57,7 @@ class WelcomeScreen extends StatelessWidget {
               height: 85.h,
             ),
             CustomButton(
-              onPressed: () => Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => const LoginScreen(),
-                ),
-              ),
+              onPressed: () => context.pushNamed(RouterNames.login),
               title: 'Get Started',
               backgroundColor: AppColors.primaryColor,
               foregroundColor: AppColors.secondaryColor,
@@ -69,11 +66,7 @@ class WelcomeScreen extends StatelessWidget {
               height: 10.h,
             ),
             CustomButton(
-              onPressed: () => Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => const RegisterScreen(),
-                ),
-              ),
+              onPressed: () => context.pushNamed(RouterNames.signup),
               title: 'Register',
               backgroundColor: AppColors.secondaryColor,
               foregroundColor: AppColors.primaryColor,
