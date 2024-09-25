@@ -39,7 +39,6 @@ class BookstoreApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // final user = ref.watch(authStateProvider.future).asStream();
     final router = ref.watch(routerProvider);
 
     return ScreenUtilInit(
