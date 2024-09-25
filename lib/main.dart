@@ -29,13 +29,13 @@ void main() async {
 
   runApp(
     const ProviderScope(
-      child: MainApp(),
+      child: BookstoreApp(),
     ),
   );
 }
 
-class MainApp extends ConsumerWidget {
-  const MainApp({super.key});
+class BookstoreApp extends ConsumerWidget {
+  const BookstoreApp({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

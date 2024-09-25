@@ -26,7 +26,7 @@ class AuthRepositroy {
       final user = userCredential.user;
 
       if (user == null) {
-        throw AuthException('User creation failed');
+        throw AuthException('user-creation-failed', 'User creation failed.');
       }
 
       final userModel = UserModel(
@@ -43,16 +43,7 @@ class AuthRepositroy {
 
       return true;
     } on FirebaseAuthException catch (e) {
-      switch (e.code) {
-        case 'email-already-in-use':
-          throw AuthException('Email is already in use.');
-        case 'invalid-email':
-          throw AuthException('Invalid email address.');
-        case 'weak-password':
-          throw AuthException('The password provided is too weak.');
-        default:
-          throw AuthException('Sign Up Failed: ${e.message}');
-      }
+      throw AuthException.fromFirebaseError(e.code);
     }
   }
 
@@ -69,28 +60,19 @@ class AuthRepositroy {
       final user = userCredential.user;
 
       if (user == null) {
-        throw AuthException('Login faild');
+        throw AuthException('login-failed', 'Login failed.');
       }
 
       final doc =
           await _firebaseFirestore.collection('users').doc(user.uid).get();
 
       if (!doc.exists) {
-        throw AuthException('User not found in Firestore');
+        throw AuthException('user-not-found', 'User not found in Firestore.');
       }
 
       return true;
     } on FirebaseAuthException catch (e) {
-      switch (e.code) {
-        case 'user-not-found':
-          throw AuthException('No user found with this email.');
-        case 'wrong-password':
-          throw AuthException('Incorrect password.');
-        case 'invalid-email':
-          throw AuthException('Invalid email address.');
-        default:
-          throw AuthException('Sign In Failed: ${e.message}');
-      }
+      throw AuthException.fromFirebaseError(e.code);
     }
   }
 
@@ -100,14 +82,7 @@ class AuthRepositroy {
 
       return true;
     } on FirebaseAuthException catch (e) {
-      switch (e.code) {
-        case 'user-not-found':
-          throw AuthException('No user found with this email.');
-        case 'invalid-email':
-          throw AuthException('Invalid email address.');
-        default:
-          throw AuthException('Password Reset Failed: ${e.message}');
-      }
+      throw AuthException.fromFirebaseError(e.code);
     }
   }
 
