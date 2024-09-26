@@ -47,7 +47,6 @@ class CTextTheme {
     ),
     labelSmall: GoogleFonts.openSans().copyWith(
       fontSize: 11.sp,
-      fontWeight: FontWeight.w300,
       color: AppColors.primaryColor,
     ),
   );
