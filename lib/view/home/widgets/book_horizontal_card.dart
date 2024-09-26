@@ -12,7 +12,7 @@ class BookHorizontalCard extends StatelessWidget {
         'https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1547955025i/42478640.jpg';
 
     return Container(
-      height: 160.h,
+      height: 180.h,
       width: 280.w,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8).r,

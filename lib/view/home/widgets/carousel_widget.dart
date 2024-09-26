@@ -28,13 +28,13 @@ class _CarouselWidgetState extends State<CarouselWidget> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 160.h,
+      height: 180.h,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Expanded(
             child: SizedBox(
-              height: 160.h,
+              height: 180.h,
               width: double.infinity,
               child: CarouselSlider(
                 items: items,
