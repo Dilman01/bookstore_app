@@ -1,16 +1,19 @@
+import 'package:bookstore_app/models/book_model/book_model.dart';
 import 'package:flutter/material.dart';
 
 import 'package:bookstore_app/core/constants/app_colors.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class BookHorizontalCard extends StatelessWidget {
-  const BookHorizontalCard({super.key});
+  const BookHorizontalCard({
+    super.key,
+    required this.book,
+  });
+
+  final BookModel book;
 
   @override
   Widget build(BuildContext context) {
-    const image =
-        'https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1547955025i/42478640.jpg';
-
     return Container(
       height: 180.h,
       width: 280.w,
@@ -23,10 +26,13 @@ class BookHorizontalCard extends StatelessWidget {
           Container(
             width: 95.w,
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(8).r,
-              image: const DecorationImage(
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(8),
+                bottomLeft: Radius.circular(8),
+              ).r,
+              image: DecorationImage(
                 image: NetworkImage(
-                  image,
+                  book.imageUrl,
                 ),
                 fit: BoxFit.cover,
               ),
@@ -42,13 +48,13 @@ class BookHorizontalCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Text(
-                  'Novel',
+                  book.category,
                   style: Theme.of(context).textTheme.displaySmall!.copyWith(
                         color: AppColors.secondaryColor.withOpacity(0.6),
                       ),
                 ),
                 Text(
-                  'Tuesday Mooney Talks to Ghosts',
+                  book.title,
                   style: Theme.of(context).textTheme.titleSmall!.copyWith(
                         color: AppColors.secondaryColor,
                       ),
@@ -58,7 +64,7 @@ class BookHorizontalCard extends StatelessWidget {
                   height: 8.h,
                 ),
                 Text(
-                  'Kate Racculia',
+                  book.author,
                   style: Theme.of(context).textTheme.labelSmall!.copyWith(
                         color: AppColors.secondaryColor,
                       ),
@@ -71,7 +77,7 @@ class BookHorizontalCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      '\$33.00',
+                      '\$${book.price}',
                       style: Theme.of(context).textTheme.titleLarge!.copyWith(
                             color: AppColors.secondaryColor,
                           ),
@@ -85,7 +91,7 @@ class BookHorizontalCard extends StatelessWidget {
                       ),
                       child: Center(
                         child: Text(
-                          '12% off',
+                          '${book.discount ?? 10} off',
                           style:
                               Theme.of(context).textTheme.labelSmall!.copyWith(
                                     fontWeight: FontWeight.bold,

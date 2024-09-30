@@ -2,6 +2,7 @@ import 'package:bookstore_app/core/constants/app_colors.dart';
 import 'package:bookstore_app/view/home/widgets/book_vertical_card.dart';
 import 'package:bookstore_app/view/home/widgets/carousel_widget.dart';
 import 'package:bookstore_app/view/home/widgets/section_header.dart';
+import 'package:bookstore_app/view_model/home_view_model/home_view_model.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -46,7 +47,23 @@ class HomeScreen extends ConsumerWidget {
               SizedBox(
                 height: 16.h,
               ),
-              const CarouselWidget(),
+              FutureBuilder(
+                future:
+                    ref.watch(homeViewModelProvider.notifier).getBestDeals(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return Center(
+                      child: CircularProgressIndicator(
+                        color: AppColors.primaryColor,
+                      ),
+                    );
+                  }
+
+                  return CarouselWidget(
+                    bestBooks: snapshot.data!,
+                  );
+                },
+              ),
               SizedBox(
                 height: 50.h,
               ),
@@ -54,20 +71,35 @@ class HomeScreen extends ConsumerWidget {
               SizedBox(
                 height: 32.h,
               ),
-              SizedBox(
-                height: 294.h,
-                child: ListView.separated(
-                  scrollDirection: Axis.horizontal,
-                  padding: const EdgeInsets.only(right: 20).r,
-                  shrinkWrap: true,
-                  itemCount: 4,
-                  separatorBuilder: (context, index) => SizedBox(
-                    width: 16.w,
-                  ),
-                  itemBuilder: (context, index) {
-                    return const BookVerticalCard();
-                  },
-                ),
+              FutureBuilder(
+                future: ref.watch(homeViewModelProvider.notifier).getTopBooks(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return Center(
+                      child: CircularProgressIndicator(
+                        color: AppColors.primaryColor,
+                      ),
+                    );
+                  }
+                  return SizedBox(
+                    height: 294.h,
+                    child: ListView.separated(
+                      scrollDirection: Axis.horizontal,
+                      padding: const EdgeInsets.only(right: 20).r,
+                      shrinkWrap: true,
+                      itemCount: 4,
+                      separatorBuilder: (context, index) => SizedBox(
+                        width: 16.w,
+                      ),
+                      itemBuilder: (context, index) {
+                        final book = snapshot.data![index];
+                        return BookVerticalCard(
+                          book: book,
+                        );
+                      },
+                    ),
+                  );
+                },
               ),
               SizedBox(
                 height: 50.h,
@@ -76,20 +108,36 @@ class HomeScreen extends ConsumerWidget {
               SizedBox(
                 height: 32.h,
               ),
-              SizedBox(
-                height: 294.h,
-                child: ListView.separated(
-                  scrollDirection: Axis.horizontal,
-                  padding: const EdgeInsets.only(right: 20).r,
-                  shrinkWrap: true,
-                  itemCount: 4,
-                  separatorBuilder: (context, index) => SizedBox(
-                    width: 16.w,
-                  ),
-                  itemBuilder: (context, index) {
-                    return const BookVerticalCard();
-                  },
-                ),
+              FutureBuilder(
+                future:
+                    ref.watch(homeViewModelProvider.notifier).getLatestBooks(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return Center(
+                      child: CircularProgressIndicator(
+                        color: AppColors.primaryColor,
+                      ),
+                    );
+                  }
+                  return SizedBox(
+                    height: 294.h,
+                    child: ListView.separated(
+                      scrollDirection: Axis.horizontal,
+                      padding: const EdgeInsets.only(right: 20).r,
+                      shrinkWrap: true,
+                      itemCount: 4,
+                      separatorBuilder: (context, index) => SizedBox(
+                        width: 16.w,
+                      ),
+                      itemBuilder: (context, index) {
+                        final book = snapshot.data![index];
+                        return BookVerticalCard(
+                          book: book,
+                        );
+                      },
+                    ),
+                  );
+                },
               ),
               SizedBox(
                 height: 50.h,
@@ -98,20 +146,37 @@ class HomeScreen extends ConsumerWidget {
               SizedBox(
                 height: 32.h,
               ),
-              SizedBox(
-                height: 294.h,
-                child: ListView.separated(
-                  scrollDirection: Axis.horizontal,
-                  padding: const EdgeInsets.only(right: 20).r,
-                  shrinkWrap: true,
-                  itemCount: 4,
-                  separatorBuilder: (context, index) => SizedBox(
-                    width: 16.w,
-                  ),
-                  itemBuilder: (context, index) {
-                    return const BookVerticalCard();
-                  },
-                ),
+              FutureBuilder(
+                future: ref
+                    .watch(homeViewModelProvider.notifier)
+                    .getUpcomingBooks(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return Center(
+                      child: CircularProgressIndicator(
+                        color: AppColors.primaryColor,
+                      ),
+                    );
+                  }
+                  return SizedBox(
+                    height: 294.h,
+                    child: ListView.separated(
+                      scrollDirection: Axis.horizontal,
+                      padding: const EdgeInsets.only(right: 20).r,
+                      shrinkWrap: true,
+                      itemCount: 4,
+                      separatorBuilder: (context, index) => SizedBox(
+                        width: 16.w,
+                      ),
+                      itemBuilder: (context, index) {
+                        final book = snapshot.data![index];
+                        return BookVerticalCard(
+                          book: book,
+                        );
+                      },
+                    ),
+                  );
+                },
               ),
               SizedBox(
                 height: 20.h,
