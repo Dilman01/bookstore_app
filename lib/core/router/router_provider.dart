@@ -11,6 +11,7 @@ import 'package:bookstore_app/view/book_detail/book_detail_screen.dart';
 import 'package:bookstore_app/view/cart/cart_screen.dart';
 import 'package:bookstore_app/view/categories/categories_screen.dart';
 import 'package:bookstore_app/view/home/home_screen.dart';
+import 'package:bookstore_app/view/home/see_more_screen.dart';
 import 'package:bookstore_app/view/main/main_wrapper.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -158,6 +159,19 @@ GoRouter router(RouterRef ref) {
           final book = state.extra as BookModel;
 
           return BookDetailScreen(book: book);
+        },
+      ),
+      GoRoute(
+        name: RouterNames.seeMore,
+        path: '/see_more',
+        builder: (context, state) {
+          final books = state.extra as List<BookModel>;
+          final title = state.uri.queryParameters['title']!;
+
+          return SeeMoreScreen(
+            books: books,
+            title: title,
+          );
         },
       ),
     ],

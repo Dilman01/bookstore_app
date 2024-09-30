@@ -70,6 +70,8 @@ class BookVerticalCard extends StatelessWidget {
                   ),
                   Text(
                     book.title,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
                     style: Theme.of(context).textTheme.titleMedium!.copyWith(
                           color: AppColors.secondaryColor,
                         ),

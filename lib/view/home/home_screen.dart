@@ -67,7 +67,11 @@ class HomeScreen extends ConsumerWidget {
               SizedBox(
                 height: 50.h,
               ),
-              const SectionHeader(title: 'Top Books'),
+              SectionHeader(
+                title: 'Top Books',
+                booksList:
+                    ref.watch(homeViewModelProvider.notifier).getTopBooks(),
+              ),
               SizedBox(
                 height: 32.h,
               ),
@@ -104,7 +108,11 @@ class HomeScreen extends ConsumerWidget {
               SizedBox(
                 height: 50.h,
               ),
-              const SectionHeader(title: 'Latest Books'),
+              SectionHeader(
+                title: 'Latest Books',
+                booksList:
+                    ref.watch(homeViewModelProvider.notifier).getLatestBooks(),
+              ),
               SizedBox(
                 height: 32.h,
               ),
@@ -142,7 +150,12 @@ class HomeScreen extends ConsumerWidget {
               SizedBox(
                 height: 50.h,
               ),
-              const SectionHeader(title: 'Upcoming Books'),
+              SectionHeader(
+                title: 'Upcoming Books',
+                booksList: ref
+                    .watch(homeViewModelProvider.notifier)
+                    .getUpcomingBooks(),
+              ),
               SizedBox(
                 height: 32.h,
               ),
