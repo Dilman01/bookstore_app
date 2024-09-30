@@ -1,11 +1,13 @@
 import 'package:bookstore_app/core/common/providers/auth_state_provider.dart';
 import 'package:bookstore_app/core/common/widgets/splash_screen.dart';
 import 'package:bookstore_app/core/router/router_names.dart';
+import 'package:bookstore_app/models/book_model/book_model.dart';
 import 'package:bookstore_app/view/account/account_screen.dart';
 import 'package:bookstore_app/view/auth/forgot_password_screen/forgot_password_screen.dart';
 import 'package:bookstore_app/view/auth/login_screen/login_screen.dart';
 import 'package:bookstore_app/view/auth/register_screen/register_screen.dart';
 import 'package:bookstore_app/view/auth/welcome_screen.dart';
+import 'package:bookstore_app/view/book_detail/book_detail_screen.dart';
 import 'package:bookstore_app/view/cart/cart_screen.dart';
 import 'package:bookstore_app/view/categories/categories_screen.dart';
 import 'package:bookstore_app/view/home/home_screen.dart';
@@ -148,6 +150,15 @@ GoRouter router(RouterRef ref) {
         name: RouterNames.forgotPassword,
         path: '/forgot_password',
         builder: (context, state) => const ForgotPasswordScreen(),
+      ),
+      GoRoute(
+        name: RouterNames.bookDetail,
+        path: '/book_detail',
+        builder: (context, state) {
+          final book = state.extra as BookModel;
+
+          return BookDetailScreen(book: book);
+        },
       ),
     ],
   );

@@ -10,4 +10,5 @@ class RouterNames {
   static const categories = 'categories';
   static const cart = 'cart';
   static const account = 'account';
+  static const bookDetail = 'book_detail';
 }
