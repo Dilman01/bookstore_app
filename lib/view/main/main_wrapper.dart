@@ -32,7 +32,7 @@ class _MainWrapperState extends State<MainWrapper> {
   void _goToBranch(int index) {
     widget.navigationShell.goBranch(
       index,
-      // initialLocation: index == widget.navigationShell.currentIndex,
+      initialLocation: index == widget.navigationShell.currentIndex,
     );
   }
 

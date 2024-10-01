@@ -1,16 +1,21 @@
+import 'package:bookstore_app/models/book_model/book_model.dart';
+import 'package:bookstore_app/view_model/cart_view_model/cart_view_model.dart';
 import 'package:flutter/material.dart';
 
 import 'package:bookstore_app/core/constants/app_colors.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class BookCartCard extends StatelessWidget {
-  const BookCartCard({super.key});
+class BookCartCard extends ConsumerWidget {
+  const BookCartCard({
+    super.key,
+    required this.book,
+  });
+
+  final BookModel book;
 
   @override
-  Widget build(BuildContext context) {
-    const image =
-        'https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1547955025i/42478640.jpg';
-
+  Widget build(BuildContext context, WidgetRef ref) {
     return Container(
       height: 144.h,
       width: 320.w,
@@ -24,9 +29,9 @@ class BookCartCard extends StatelessWidget {
             width: 95.w,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(8).r,
-              image: const DecorationImage(
+              image: DecorationImage(
                 image: NetworkImage(
-                  image,
+                  book.imageUrl,
                 ),
                 fit: BoxFit.cover,
               ),
@@ -48,20 +53,27 @@ class BookCartCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'Novel',
+                      book.category,
                       style: Theme.of(context).textTheme.displaySmall!.copyWith(
                             color: AppColors.secondaryColor.withOpacity(0.6),
                           ),
                     ),
-                    Icon(
-                      Icons.close,
-                      color: AppColors.secondaryColor,
-                      size: 20.r,
+                    InkWell(
+                      onTap: () {
+                        ref
+                            .read(cartViewModelProvider.notifier)
+                            .deleteFromCart(book);
+                      },
+                      child: Icon(
+                        Icons.close,
+                        color: AppColors.secondaryColor,
+                        size: 20.r,
+                      ),
                     ),
                   ],
                 ),
                 Text(
-                  'Tuesday Mooney Talks to Ghosts',
+                  book.title,
                   style: Theme.of(context).textTheme.titleSmall!.copyWith(
                         color: AppColors.secondaryColor,
                       ),
@@ -71,7 +83,7 @@ class BookCartCard extends StatelessWidget {
                   height: 6.h,
                 ),
                 Text(
-                  'Kate Racculia',
+                  book.author,
                   style: Theme.of(context).textTheme.labelSmall!.copyWith(
                         color: AppColors.secondaryColor,
                       ),
@@ -127,7 +139,7 @@ class BookCartCard extends StatelessWidget {
                       ],
                     ),
                     Text(
-                      '\$33.00',
+                      '\$${book.price}',
                       style: Theme.of(context).textTheme.titleLarge!.copyWith(
                             color: AppColors.secondaryColor,
                           ),
