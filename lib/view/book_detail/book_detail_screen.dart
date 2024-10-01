@@ -81,12 +81,8 @@ class BookDetailScreen extends StatelessWidget {
                               child: Text(
                                 book.author,
                                 maxLines: 2,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .titleSmall!
-                                    .copyWith(
-                                      overflow: TextOverflow.ellipsis,
-                                    ),
+                                overflow: TextOverflow.ellipsis,
+                                style: Theme.of(context).textTheme.titleSmall,
                               ),
                             ),
                           ],
@@ -101,9 +97,13 @@ class BookDetailScreen extends StatelessWidget {
                               'Category: ',
                               style: Theme.of(context).textTheme.bodySmall,
                             ),
-                            Text(
-                              book.category,
-                              style: Theme.of(context).textTheme.titleSmall,
+                            Flexible(
+                              child: Text(
+                                book.category,
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                                style: Theme.of(context).textTheme.titleSmall,
+                              ),
                             ),
                           ],
                         ),

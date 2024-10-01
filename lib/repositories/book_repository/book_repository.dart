@@ -31,4 +31,14 @@ class BookRepository {
     final List<BookModel> books = await fetchBooks();
     return books.where((book) => book.isUpcomingBook).toList();
   }
+
+  Future<List<BookModel>> getBooksByCategory(String category) async {
+    final List<BookModel> books = await fetchBooks();
+
+    return books
+        .where(
+          (book) => book.category.toLowerCase() == category.toLowerCase(),
+        )
+        .toList();
+  }
 }

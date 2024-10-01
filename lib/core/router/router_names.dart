@@ -12,4 +12,5 @@ class RouterNames {
   static const account = 'account';
   static const bookDetail = 'book_detail';
   static const seeMore = 'see_more';
+  static const categorySceen = 'category';
 }

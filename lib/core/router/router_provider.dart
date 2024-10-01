@@ -10,6 +10,7 @@ import 'package:bookstore_app/view/auth/welcome_screen.dart';
 import 'package:bookstore_app/view/book_detail/book_detail_screen.dart';
 import 'package:bookstore_app/view/cart/cart_screen.dart';
 import 'package:bookstore_app/view/categories/categories_screen.dart';
+import 'package:bookstore_app/view/categories/category_screen.dart';
 import 'package:bookstore_app/view/home/home_screen.dart';
 import 'package:bookstore_app/view/home/see_more_screen.dart';
 import 'package:bookstore_app/view/main/main_wrapper.dart';
@@ -169,6 +170,19 @@ GoRouter router(RouterRef ref) {
           final title = state.uri.queryParameters['title']!;
 
           return SeeMoreScreen(
+            books: books,
+            title: title,
+          );
+        },
+      ),
+      GoRoute(
+        name: RouterNames.categorySceen,
+        path: '/category',
+        builder: (context, state) {
+          final books = state.extra as List<BookModel>;
+          final title = state.uri.queryParameters['title']!;
+
+          return CategoryScreen(
             books: books,
             title: title,
           );
