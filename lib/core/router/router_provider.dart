@@ -17,6 +17,7 @@ import 'package:bookstore_app/view/main/main_wrapper.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'router_provider.g.dart';
@@ -33,8 +34,9 @@ final GlobalKey<NavigatorState> _rootNavigatorAccount =
     GlobalKey<NavigatorState>(debugLabel: 'shellAccount');
 
 @riverpod
-GoRouter router(RouterRef ref) {
+GoRouter router(Ref ref) {
   final user = ref.watch(authStateProvider);
+
   return GoRouter(
     navigatorKey: _rootNavigatorKey,
     initialLocation: '/home',
